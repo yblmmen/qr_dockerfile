@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+    db:
+        image: mariadb:11.3.2
+        container_name: qr-db
+        restart: always
+        environment:
+            MYSQL_DATABASE: innerinfo
+            MYSQL_USER: root
+            MYSQL_PASSWORD: berea6922
+            MYSQL_ROOT_PASSWORD: berea6922
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./mariadb_data:/var/lib/mysql
+            
+    php:
+        container_name: qr-php
+        build:
+            context: ./images/php
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        ports:
+            - "9000:9000"
+        volumes:
+            - inner:/var/www/html
+    nginx:
+        container_name: qr-nginx
+        build:
+            context: ./images/nginx
+            dockerfile: Dockerfile
+        volumes:
+            - inner:/var/www/html
+            - ./images/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+        ports:
+            - "80:80"
+            - "443:443"
+        
+volumes:
+    inner:

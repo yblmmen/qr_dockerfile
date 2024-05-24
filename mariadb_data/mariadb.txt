@@ -1,0 +1,5 @@
+            
+MYSQL_DATABASE: inner
+MYSQL_USER: root
+MYSQL_PASSWORD: berea6922
+MYSQL_ROOT_PASSWORD: berea6922
