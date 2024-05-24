@@ -7,7 +7,7 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 
 RUN git clone https://github.com/gnuboard/gnuboard5.git
-RUN mkdir /inner/data
+RUN mkdir /gnuboard5/data
 
 EXPOSE 80
 
